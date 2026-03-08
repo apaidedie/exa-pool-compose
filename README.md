@@ -1,5 +1,9 @@
 # Exa Pool
 
+> A Node.js + SQLite + Docker Compose deployment for the original Exa Pool worker.
+
+将原本基于 Cloudflare Worker + D1 的 Exa Pool，改造成可直接自托管的本地部署版本。
+
 基于原始 `Cloudflare Worker + D1` 实现改造的本地部署版 Exa API 密钥池，现支持：
 
 - 上游项目：`https://github.com/chengtx809/exa-pool`
@@ -8,6 +12,28 @@
 - 使用 SQLite 兼容原有 D1 调用方式
 - 通过 Docker Compose 持久化部署
 - 保留原管理面板、管理接口与代理接口
+
+## 为什么用这个版本
+
+- 不依赖 Cloudflare D1，直接使用本地 SQLite
+- 不依赖 Worker 运行时，直接用 Node.js 启动
+- 支持 Docker Compose，方便自托管部署
+- 尽量复用原始 `worker.js` 业务逻辑，降低维护成本
+
+## 快速开始
+
+```bash
+cp .env.example .env
+npm start
+```
+
+或：
+
+```bash
+docker compose up -d --build
+```
+
+启动后访问 `http://127.0.0.1:3000/`。
 
 ## 功能特性
 
