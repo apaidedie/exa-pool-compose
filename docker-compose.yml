@@ -1,0 +1,13 @@
+services:
+  exa-pool:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: exa-pool
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "${PORT:-3000}:3000"
+    volumes:
+      - ./data:/app/data
