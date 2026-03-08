@@ -1,8 +1,6 @@
 services:
   exa-pool:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ghcr.io/apaidedie/exa-pool-compose:latest
     container_name: exa-pool
     restart: unless-stopped
     env_file:

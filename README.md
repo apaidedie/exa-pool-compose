@@ -30,7 +30,7 @@ npm start
 或：
 
 ```bash
-docker compose up -d --build
+docker compose up -d
 ```
 
 启动后访问 `http://127.0.0.1:3000/`。
@@ -121,7 +121,7 @@ cp .env.example .env
 ### 2. 启动服务
 
 ```bash
-docker compose up -d --build
+docker compose up -d
 ```
 
 ### 3. 查看日志
