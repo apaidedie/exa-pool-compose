@@ -141,6 +141,55 @@ docker compose down
 - SQLite 数据文件会持久化到宿主机的 `./data`
 - 容器内数据库路径固定为 `/app/data/exa-pool.sqlite`
 
+## 使用预构建镜像
+
+当 GitHub Actions 构建成功后，你和其他用户可以直接使用 GHCR 镜像：
+
+```bash
+docker pull ghcr.io/apaidedie/exa-pool-compose:latest
+```
+
+### 直接运行
+
+```bash
+docker run -d \
+  --name exa-pool \
+  -p 3000:3000 \
+  -e ADMIN_KEY=your-admin-key \
+  -e VALIDATION_CONCURRENCY=10 \
+  -e PORT=3000 \
+  -e DB_PATH=/app/data/exa-pool.sqlite \
+  -v exa-pool-data:/app/data \
+  ghcr.io/apaidedie/exa-pool-compose:latest
+```
+
+### 使用拉镜像版 Compose
+
+```yaml
+services:
+  exa-pool:
+    image: ghcr.io/apaidedie/exa-pool-compose:latest
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      ADMIN_KEY: your-admin-key
+      VALIDATION_CONCURRENCY: 10
+      PORT: 3000
+      DB_PATH: /app/data/exa-pool.sqlite
+    volumes:
+      - exa-pool-data:/app/data
+
+volumes:
+  exa-pool-data:
+```
+
+说明：
+
+- 推送到 `main` 后会自动发布 `latest`
+- 推送版本标签（如 `v1.0.1`）后会自动发布同名版本镜像
+- 镜像地址为 `ghcr.io/apaidedie/exa-pool-compose`
+
 ## 初始化使用
 
 1. 打开管理面板 `/`
